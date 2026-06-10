@@ -11,6 +11,8 @@ type Props = {
   updateError?: string;
   onChange: (patch: Partial<Settings>) => void;
   onResetAll: () => void;
+  onExport: () => void;
+  onImport: () => void;
   onBack: () => void;
   onCheckUpdate: () => void;
   onInstallUpdate: () => void;
@@ -23,11 +25,14 @@ export function SettingsPage({
   updateError,
   onChange,
   onResetAll,
+  onExport,
+  onImport,
   onBack,
   onCheckUpdate,
   onInstallUpdate,
 }: Props) {
   const [confirmReset, setConfirmReset] = useState(false);
+  const [confirmImport, setConfirmImport] = useState(false);
   const [appVersion, setAppVersion] = useState("...");
 
   useEffect(() => {
@@ -190,6 +195,40 @@ export function SettingsPage({
 
         <section className="settings-section">
           <h2 className="section-label">Data</h2>
+
+          <div className="settings-row">
+            <div>
+              <p className="row-label">Export data</p>
+              <p className="row-sub">Save all projects as a JSON file.</p>
+            </div>
+            <button type="button" className="btn-ghost" onClick={onExport}>
+              Export…
+            </button>
+          </div>
+
+          <div className="settings-row">
+            <div>
+              <p className="row-label">Import data</p>
+              <p className="row-sub">
+                Replace everything with a previously exported file.
+              </p>
+            </div>
+            <button
+              type="button"
+              className={`btn-danger${confirmImport ? " confirm" : ""}`}
+              onClick={() => {
+                if (confirmImport) {
+                  onImport();
+                  setConfirmImport(false);
+                } else {
+                  setConfirmImport(true);
+                }
+              }}
+              onBlur={() => setConfirmImport(false)}
+            >
+              {confirmImport ? "Click again to confirm" : "Import…"}
+            </button>
+          </div>
 
           <div className="settings-row">
             <div>

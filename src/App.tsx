@@ -1,8 +1,17 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Sidebar } from "./components/Sidebar";
 import { Board } from "./components/Board";
 import { SettingsPage } from "./components/SettingsPage";
-import { initState, saveState } from "./storage";
+import { ToastRegion, useToasts } from "./components/Toast";
+import {
+  initState,
+  scheduleSave,
+  flushSaves,
+  installAutoFlush,
+  onSaveStatus,
+  exportData,
+  importData,
+} from "./storage";
 import { createProject, seedState, uid, PALETTE } from "./data";
 import type { AppState, Project, Settings } from "./types";
 import type { IconName } from "./icons";
@@ -30,10 +39,37 @@ function AppLoaded({ initial }: { initial: AppState }) {
   const [updateStatus, setUpdateStatus] = useState<UpdateStatus>("idle");
   const [updateInfo, setUpdateInfo] = useState<UpdateInfo | undefined>();
   const [updateError, setUpdateError] = useState<string | undefined>();
+  const { toasts, push, dismiss } = useToasts();
 
+  // Skip the very first run — it would immediately re-save the state we just
+  // loaded from disk.
+  const firstSave = useRef(true);
   useEffect(() => {
-    saveState(state);
+    if (firstSave.current) {
+      firstSave.current = false;
+      return;
+    }
+    scheduleSave(state);
   }, [state]);
+
+  useEffect(() => installAutoFlush(), []);
+
+  useEffect(
+    () =>
+      onSaveStatus((s) => {
+        if (s.ok) {
+          dismiss("save-error");
+        } else {
+          push({
+            id: "save-error",
+            kind: "danger",
+            duration: 0,
+            message: `Couldn't save your data — changes are kept in this window. (${s.message})`,
+          });
+        }
+      }),
+    [push, dismiss]
+  );
 
   // Resolve theme, following the OS when set to "system".
   useEffect(() => {
@@ -281,6 +317,36 @@ function AppLoaded({ initial }: { initial: AppState }) {
     }
   };
 
+  const handleExport = async () => {
+    try {
+      const saved = await exportData(state);
+      if (saved) push({ message: "Exported your data." });
+    } catch (e) {
+      push({
+        kind: "danger",
+        message: `Export failed: ${e instanceof Error ? e.message : String(e)}`,
+      });
+    }
+  };
+
+  const handleImport = async () => {
+    try {
+      const imported = await importData();
+      if (!imported) return; // user cancelled the dialog
+      setState(imported);
+      scheduleSave(imported);
+      await flushSaves();
+      setView("board");
+      const n = imported.projects.length;
+      push({ message: `Imported ${n} project${n === 1 ? "" : "s"}.` });
+    } catch {
+      push({
+        kind: "danger",
+        message: "That file doesn't look like an Atelier export.",
+      });
+    }
+  };
+
   const handleInstallUpdate = async () => {
     setUpdateStatus("downloading");
     setUpdateError(undefined);
@@ -338,12 +404,15 @@ function AppLoaded({ initial }: { initial: AppState }) {
             updateError={updateError}
             onChange={updateSettings}
             onResetAll={resetAll}
+            onExport={handleExport}
+            onImport={handleImport}
             onBack={() => setView("board")}
             onCheckUpdate={handleCheckUpdate}
             onInstallUpdate={handleInstallUpdate}
           />
         )}
       </main>
+      <ToastRegion toasts={toasts} onDismiss={dismiss} />
     </div>
   );
 }
