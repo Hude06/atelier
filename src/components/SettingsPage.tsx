@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Density, Settings, ThemeMode } from "../types";
 import { Icon } from "../icons";
 import { PALETTE } from "../data";
@@ -26,6 +26,14 @@ export function SettingsPage({
   onInstallUpdate,
 }: Props) {
   const [confirmReset, setConfirmReset] = useState(false);
+  const [appVersion, setAppVersion] = useState("...");
+
+  useEffect(() => {
+    import("@tauri-apps/api/app")
+      .then((m) => m.getVersion())
+      .then(setAppVersion)
+      .catch(() => setAppVersion("0.1.1"));
+  }, []);
 
   return (
     <div className="settings-view">
@@ -152,7 +160,7 @@ export function SettingsPage({
                 {updateStatus === "ready" && "Update installed. Restart to apply."}
                 {updateStatus === "error" && "Could not check for updates."}
                 {(updateStatus === "idle" || updateStatus === "checking") &&
-                  "Currently on version 0.1.0."}
+                  `Currently on version ${appVersion}.`}
               </p>
             </div>
             {updateStatus === "available" ? (
@@ -206,8 +214,8 @@ export function SettingsPage({
 
         <footer className="settings-footer">
           <span className="brand-tile small" />
-          Atelier 0.1.0 — a quiet kanban board. Your data lives only on this
-          device.
+          Atelier {appVersion} — a quiet kanban board. Your data lives only on
+          this device.
         </footer>
       </div>
     </div>
