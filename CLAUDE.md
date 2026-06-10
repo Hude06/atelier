@@ -21,22 +21,28 @@ The signing key lives at `~/.tauri/atelier.key` (no password — use `--password
    - `src-tauri/tauri.conf.json` → `"version": "X.X.X"`
    - `src-tauri/Cargo.toml` → `version = "X.X.X"`
 
-2. **Build** (loads Apple signing creds from `.env`):
+2. **Build** (loads Apple signing creds from `.env`; the updater archive is generated and
+   signed during the build via `bundle.createUpdaterArtifacts` in `tauri.conf.json`):
    ```
-   source .env && npm run tauri build
+   source .env && \
+   export TAURI_SIGNING_PRIVATE_KEY="${TAURI_SIGNING_PRIVATE_KEY:-$HOME/.tauri/atelier.key}" && \
+   export TAURI_SIGNING_PRIVATE_KEY_PASSWORD="${TAURI_SIGNING_PRIVATE_KEY_PASSWORD-}" && \
+   npm run tauri build
    ```
    Outputs:
    - DMG (for direct download): `src-tauri/target/release/bundle/dmg/Atelier_X.X.X_aarch64.dmg`
-   - App archive (for updater): `src-tauri/target/release/bundle/macos/Atelier_X.X.X_aarch64.app.tar.gz`
+   - Updater archive + signature: `src-tauri/target/release/bundle/macos/Atelier.app.tar.gz` and `.sig`
 
-3. **Sign** the `.app.tar.gz` for the updater (NOT the dmg — the updater extracts a tar.gz, not a dmg):
+3. **Rename** the updater archive to the versioned asset name referenced by `latest.json`:
    ```
-   npx tauri signer sign \
-     --private-key-path /Users/jude/.tauri/atelier.key \
-     --password "" \
-     src-tauri/target/release/bundle/macos/Atelier_X.X.X_aarch64.app.tar.gz
+   cd src-tauri/target/release/bundle/macos
+   cp Atelier.app.tar.gz     Atelier_X.X.X_aarch64.app.tar.gz
+   cp Atelier.app.tar.gz.sig Atelier_X.X.X_aarch64.app.tar.gz.sig
    ```
-   Output: `Atelier_X.X.X_aarch64.app.tar.gz.sig` alongside the archive.
+   **Never create the `.app.tar.gz` by hand with macOS `tar`.** BSD tar embeds AppleDouble
+   (`._*`) metadata entries; the updater's Rust tar extractor chokes on them
+   ("failed to unpack `._Atelier.app`"), and the app shows "Could not install update."
+   Always use the archive produced by `tauri build`.
 
 4. **Create `latest.json`** in the project root:
    ```json

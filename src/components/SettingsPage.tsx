@@ -8,6 +8,7 @@ type Props = {
   settings: Settings;
   updateStatus: UpdateStatus;
   updateInfo?: UpdateInfo;
+  updateError?: string;
   onChange: (patch: Partial<Settings>) => void;
   onResetAll: () => void;
   onBack: () => void;
@@ -19,6 +20,7 @@ export function SettingsPage({
   settings,
   updateStatus,
   updateInfo,
+  updateError,
   onChange,
   onResetAll,
   onBack,
@@ -159,7 +161,8 @@ export function SettingsPage({
                 {updateStatus === "downloading" && "Downloading update…"}
                 {updateStatus === "ready" && "Update installed. Restart to apply."}
                 {updateStatus === "error" && "Could not check for updates."}
-                {updateStatus === "install-error" && "Could not install update."}
+                {updateStatus === "install-error" &&
+                  `Could not install update${updateError ? `: ${updateError}` : "."}`}
                 {(updateStatus === "idle" || updateStatus === "checking") &&
                   `Currently on version ${appVersion}.`}
               </p>

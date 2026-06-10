@@ -29,6 +29,7 @@ function AppLoaded({ initial }: { initial: AppState }) {
   const [addingProject, setAddingProject] = useState(false);
   const [updateStatus, setUpdateStatus] = useState<UpdateStatus>("idle");
   const [updateInfo, setUpdateInfo] = useState<UpdateInfo | undefined>();
+  const [updateError, setUpdateError] = useState<string | undefined>();
 
   useEffect(() => {
     saveState(state);
@@ -282,11 +283,13 @@ function AppLoaded({ initial }: { initial: AppState }) {
 
   const handleInstallUpdate = async () => {
     setUpdateStatus("downloading");
+    setUpdateError(undefined);
     try {
       await downloadAndInstall();
       setUpdateStatus("ready");
     } catch (e) {
       console.error("Update install failed:", e);
+      setUpdateError(e instanceof Error ? e.message : String(e));
       setUpdateStatus("install-error");
     }
   };
@@ -332,6 +335,7 @@ function AppLoaded({ initial }: { initial: AppState }) {
             settings={state.settings}
             updateStatus={updateStatus}
             updateInfo={updateInfo}
+            updateError={updateError}
             onChange={updateSettings}
             onResetAll={resetAll}
             onBack={() => setView("board")}

@@ -4,7 +4,7 @@
   "pub_date": "2026-06-10T00:00:00Z",
   "platforms": {
     "darwin-aarch64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUNnZrN2M2U1QrenRIcHMvWlFobnRXaXFSZG9icmdnRDFwbXN4bklZTHl5RktYNVVXcEdaTnFLTnlzbEx6Q1hvaW92QUs3UjAzTGVhSEZLUUQ3Sjl4R2dLeUlUdnY5bGc0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzgxMTMyMjQ1CWZpbGU6QXRlbGllcl8wLjEuNF9hYXJjaDY0LmFwcC50YXIuZ3oKMXg1c0dIb0lUT3dhc2ZFaXBsQnhhdWtKcFdKR01Rd0FYcHJPKy9uQkplTzlBbnVOOGwzQjE3T0JYSmF5Z0sxMFpFWTdZZ1ZhQXI4eDhyTm5mM21RQUE9PQo=",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUNnZrN2M2U1QrenMxV3ZBMmJwTFVHdUZwSG9BenF0cWR5R2R2QWpLS0JEV0tPTlJQOGprOCszcVdYdGp4ODFZVmFxSnF1NEltNG9xZVBrZVR2dWp2RFBMOUtieEFuYlFVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzgxMTM0OTQyCWZpbGU6QXRlbGllci5hcHAudGFyLmd6Cnlid1hiQWRXZU5Lakx6VmxCMU5ldUE1NnVCUkwyTVhrNkhOd1M2V00zOVB5NWRiMGlyMnhqNllhVFNEanczTzVkNEZ6ck9hb2d5ZjVWZjdzcDlQVUF3PT0K",
       "url": "https://github.com/Hude06/atelier/releases/download/v0.1.4/Atelier_0.1.4_aarch64.app.tar.gz"
     }
   }
