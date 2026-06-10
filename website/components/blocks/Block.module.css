@@ -1,0 +1,7 @@
+.block {
+  padding-block: var(--space-8);
+}
+
+.block-tight {
+  padding-block: var(--space-4);
+}

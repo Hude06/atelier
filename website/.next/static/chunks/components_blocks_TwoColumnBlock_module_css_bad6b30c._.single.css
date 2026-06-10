@@ -1,0 +1,64 @@
+/* [project]/components/blocks/TwoColumnBlock.module.css [app-client] (css) */
+.TwoColumnBlock-module__3b0QVG__wrapper {
+  padding-block: var(--space-12);
+}
+
+.TwoColumnBlock-module__3b0QVG__grid {
+  gap: var(--space-8);
+  align-items: start;
+  display: grid;
+}
+
+.TwoColumnBlock-module__3b0QVG__ratio-50-50 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.TwoColumnBlock-module__3b0QVG__ratio-60-40 {
+  grid-template-columns: 3fr 2fr;
+}
+
+.TwoColumnBlock-module__3b0QVG__ratio-40-60 {
+  grid-template-columns: 2fr 3fr;
+}
+
+.TwoColumnBlock-module__3b0QVG__ratio-70-30 {
+  grid-template-columns: 7fr 3fr;
+}
+
+.TwoColumnBlock-module__3b0QVG__ratio-30-70 {
+  grid-template-columns: 3fr 7fr;
+}
+
+.TwoColumnBlock-module__3b0QVG__side-image {
+  border-radius: var(--radius);
+  width: 100%;
+  height: auto;
+  margin-bottom: var(--space-4);
+  display: block;
+}
+
+.TwoColumnBlock-module__3b0QVG__side-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-3);
+  letter-spacing: -.02em;
+  font-weight: 700;
+}
+
+.TwoColumnBlock-module__3b0QVG__side-body {
+  font-size: var(--text-md);
+  color: var(--color-muted-fg);
+  line-height: 1.6;
+}
+
+.TwoColumnBlock-module__3b0QVG__side-button {
+  margin-top: var(--space-4);
+}
+
+@media (max-width: 768px) {
+  .TwoColumnBlock-module__3b0QVG__ratio-50-50, .TwoColumnBlock-module__3b0QVG__ratio-60-40, .TwoColumnBlock-module__3b0QVG__ratio-40-60, .TwoColumnBlock-module__3b0QVG__ratio-70-30, .TwoColumnBlock-module__3b0QVG__ratio-30-70 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*# sourceMappingURL=components_blocks_TwoColumnBlock_module_css_bad6b30c._.single.css.map*/

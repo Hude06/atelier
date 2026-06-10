@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/lib/ui/Container.module.css"],"sourcesContent":[".container {\n  width: 100%;\n  margin-inline: auto;\n  padding-inline: var(--space-4);\n}\n\n.narrow {\n  max-width: 640px;\n}\n\n.default {\n  max-width: 768px;\n}\n\n.wide {\n  max-width: 1100px;\n}\n\n.full {\n  max-width: 1400px;\n}\n\n.fluid {\n  max-width: none;\n}\n\n@media (min-width: 640px) {\n  .container {\n    padding-inline: var(--space-6);\n  }\n}\n\n@media (min-width: 1024px) {\n  .container {\n    padding-inline: var(--space-8);\n  }\n}\n"],"names":[],"mappings":"AAAA;;;;;;;AAMA;;;;AAIA;;;;AAIA;;;;AAIA;;;;AAIA;;;;AAIA;EACE;;;;;AAKF;EACE"}}]
+}

@@ -1,0 +1,58 @@
+/* [project]/lib/ui/Heading.module.css [app-client] (css) */
+.Heading-module__zHDV_a__heading {
+  font-family: var(--font-heading);
+  letter-spacing: -.02em;
+  color: var(--color-fg);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.Heading-module__zHDV_a__sm {
+  font-size: var(--text-sm);
+}
+
+.Heading-module__zHDV_a__md {
+  font-size: var(--text-md);
+}
+
+.Heading-module__zHDV_a__lg {
+  font-size: var(--text-lg);
+}
+
+.Heading-module__zHDV_a__xl {
+  font-size: var(--text-xl);
+}
+
+.Heading-module__zHDV_a__display {
+  font-size: var(--text-display);
+}
+
+.Heading-module__zHDV_a__hero {
+  font-size: var(--text-hero);
+}
+
+.Heading-module__zHDV_a__tone-default {
+  color: var(--color-fg);
+}
+
+.Heading-module__zHDV_a__tone-muted {
+  color: var(--color-muted-fg);
+}
+
+.Heading-module__zHDV_a__tone-accent {
+  color: var(--color-accent);
+}
+
+.Heading-module__zHDV_a__align-left {
+  text-align: left;
+}
+
+.Heading-module__zHDV_a__align-center {
+  text-align: center;
+}
+
+.Heading-module__zHDV_a__align-right {
+  text-align: right;
+}
+
+/*# sourceMappingURL=lib_ui_Heading_module_css_bad6b30c._.single.css.map*/

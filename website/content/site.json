@@ -1,0 +1,27 @@
+{
+  "siteName": "Atelier",
+  "nav": [
+    { "label": "Home", "href": "/" },
+    { "label": "Features", "href": "/features" },
+    { "label": "Download", "href": "/download" }
+  ],
+  "fonts": {
+    "heading": "Fraunces, serif",
+    "body": "Schibsted Grotesk, sans-serif",
+    "pair": "warm"
+  },
+  "colors": {
+    "primary": "#5c3d2e",
+    "secondary": "#97745e",
+    "background": "#faf6f1",
+    "text": "#2e1f14"
+  },
+  "theme": {
+    "preset": "warm",
+    "appearance": "light"
+  },
+  "motion": {
+    "engine": "motion",
+    "intensity": "subtle"
+  }
+}

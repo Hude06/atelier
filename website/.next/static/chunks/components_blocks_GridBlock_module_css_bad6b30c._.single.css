@@ -1,0 +1,76 @@
+/* [project]/components/blocks/GridBlock.module.css [app-client] (css) */
+.GridBlock-module__4gSBZW__wrapper {
+  padding-block: var(--space-12);
+}
+
+.GridBlock-module__4gSBZW__heading {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  letter-spacing: -.02em;
+  margin-bottom: var(--space-8);
+  font-weight: 700;
+}
+
+.GridBlock-module__4gSBZW__grid {
+  gap: var(--space-6);
+  display: grid;
+}
+
+.GridBlock-module__4gSBZW__cols-1 {
+  grid-template-columns: 1fr;
+}
+
+.GridBlock-module__4gSBZW__cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.GridBlock-module__4gSBZW__cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.GridBlock-module__4gSBZW__cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.GridBlock-module__4gSBZW__card {
+  padding: var(--space-6);
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.GridBlock-module__4gSBZW__card-image {
+  border-radius: var(--radius);
+  width: 100%;
+  height: auto;
+  margin-bottom: var(--space-4);
+  display: block;
+}
+
+.GridBlock-module__4gSBZW__card-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-2);
+  font-weight: 700;
+}
+
+.GridBlock-module__4gSBZW__card-body {
+  font-size: var(--text-md);
+  color: var(--color-muted-fg);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .GridBlock-module__4gSBZW__cols-3, .GridBlock-module__4gSBZW__cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .GridBlock-module__4gSBZW__cols-2, .GridBlock-module__4gSBZW__cols-3, .GridBlock-module__4gSBZW__cols-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*# sourceMappingURL=components_blocks_GridBlock_module_css_bad6b30c._.single.css.map*/

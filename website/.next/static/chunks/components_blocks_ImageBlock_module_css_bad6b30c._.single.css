@@ -1,0 +1,41 @@
+/* [project]/components/blocks/ImageBlock.module.css [app-client] (css) */
+.ImageBlock-module__QJWNaq__wrapper {
+  padding-block: var(--space-8);
+}
+
+.ImageBlock-module__QJWNaq__inner {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ImageBlock-module__QJWNaq__sm {
+  max-width: 480px;
+}
+
+.ImageBlock-module__QJWNaq__md {
+  max-width: 720px;
+}
+
+.ImageBlock-module__QJWNaq__lg {
+  max-width: 960px;
+}
+
+.ImageBlock-module__QJWNaq__full {
+  max-width: 100%;
+}
+
+.ImageBlock-module__QJWNaq__img {
+  border-radius: var(--radius);
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.ImageBlock-module__QJWNaq__caption {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-muted-fg);
+  text-align: center;
+}
+
+/*# sourceMappingURL=components_blocks_ImageBlock_module_css_bad6b30c._.single.css.map*/

@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/components/blocks/SectionBlock.module.css"],"sourcesContent":[".section {\n  width: 100%;\n}\n\n/* Backgrounds */\n.bg-default  { background-color: var(--color-bg); }\n.bg-muted    { background-color: var(--color-muted); }\n.bg-accent   { background-color: var(--color-accent); color: var(--color-accent-fg); }\n.bg-inverse  { background-color: var(--color-fg); color: var(--color-bg); }\n\n/* Padding */\n.padding-none { padding-block: 0; }\n.padding-sm   { padding-block: var(--space-6); }\n.padding-md   { padding-block: var(--space-10); }\n.padding-lg   { padding-block: var(--space-16); }\n.padding-xl   { padding-block: var(--space-24); }\n\n.inner {\n  display: flex;\n  flex-direction: column;\n  gap: var(--space-4);\n}\n\n.heading {\n  font-family: var(--font-heading);\n  font-size: var(--text-xl);\n  font-weight: 700;\n  letter-spacing: -0.02em;\n}\n\n.body {\n  font-size: var(--text-lg);\n  line-height: 1.6;\n  opacity: 0.8;\n  max-width: 640px;\n}\n"],"names":[],"mappings":"AAAA;;;;AAKA;;;;AACA;;;;AACA;;;;;AACA;;;;;AAGA;;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AAEA;;;;;;AAMA;;;;;;;AAOA"}}]
+}

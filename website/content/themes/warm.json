@@ -1,0 +1,20 @@
+{
+  "name": "warm",
+  "label": "Warm",
+  "description": "Cream backgrounds, burnt umber ink, clay accents. Organic and generous.",
+  "colors": {
+    "bg": "oklch(0.97 0.02 80)",
+    "fg": "oklch(0.18 0.04 45)",
+    "primary": "oklch(0.42 0.12 45)",
+    "primaryForeground": "oklch(0.97 0.02 80)",
+    "accent": "oklch(0.55 0.18 35)",
+    "accentForeground": "oklch(0.97 0.02 80)",
+    "muted": "oklch(0.93 0.025 75)",
+    "mutedForeground": "oklch(0.42 0.04 50)",
+    "border": "oklch(0.87 0.02 70)",
+    "card": "oklch(0.98 0.015 80)",
+    "cardForeground": "oklch(0.18 0.04 45)"
+  },
+  "radius": "1.25rem",
+  "fontPair": "warm"
+}

@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/components/blocks/TwoColumnBlock.module.css"],"sourcesContent":[".wrapper {\n  padding-block: var(--space-12);\n}\n\n.grid {\n  display: grid;\n  gap: var(--space-8);\n  align-items: start;\n}\n\n.ratio-50-50 { grid-template-columns: 1fr 1fr; }\n.ratio-60-40 { grid-template-columns: 3fr 2fr; }\n.ratio-40-60 { grid-template-columns: 2fr 3fr; }\n.ratio-70-30 { grid-template-columns: 7fr 3fr; }\n.ratio-30-70 { grid-template-columns: 3fr 7fr; }\n\n.side-image {\n  width: 100%;\n  height: auto;\n  border-radius: var(--radius);\n  display: block;\n  margin-bottom: var(--space-4);\n}\n\n.side-title {\n  font-family: var(--font-heading);\n  font-size: var(--text-xl);\n  font-weight: 700;\n  margin-bottom: var(--space-3);\n  letter-spacing: -0.02em;\n}\n\n.side-body {\n  font-size: var(--text-md);\n  line-height: 1.6;\n  color: var(--color-muted-fg);\n}\n\n.side-button {\n  margin-top: var(--space-4);\n}\n\n@media (max-width: 768px) {\n  .ratio-50-50,\n  .ratio-60-40,\n  .ratio-40-60,\n  .ratio-70-30,\n  .ratio-30-70 {\n    grid-template-columns: 1fr;\n  }\n}\n"],"names":[],"mappings":"AAAA;;;;AAIA;;;;;;AAMA;;;;AACA;;;;AACA;;;;AACA;;;;AACA;;;;AAEA;;;;;;;;AAQA;;;;;;;;AAQA;;;;;;AAMA;;;;AAIA;EACE"}}]
+}

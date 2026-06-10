@@ -1,0 +1,20 @@
+{
+  "name": "editorial",
+  "label": "Editorial",
+  "description": "Warm paper, deep ink, terracotta accent. Hairline rules, no shadows.",
+  "colors": {
+    "bg": "oklch(0.98 0.01 85)",
+    "fg": "oklch(0.15 0.02 30)",
+    "primary": "oklch(0.15 0.02 30)",
+    "primaryForeground": "oklch(0.98 0.01 85)",
+    "accent": "oklch(0.55 0.18 35)",
+    "accentForeground": "oklch(0.98 0.01 85)",
+    "muted": "oklch(0.95 0.015 80)",
+    "mutedForeground": "oklch(0.45 0.02 40)",
+    "border": "oklch(0.88 0.015 70)",
+    "card": "oklch(0.99 0.005 85)",
+    "cardForeground": "oklch(0.15 0.02 30)"
+  },
+  "radius": "0.375rem",
+  "fontPair": "editorial"
+}

@@ -1,0 +1,23 @@
+.text {
+  font-family: var(--font-body);
+  line-height: 1.6;
+  color: var(--color-fg);
+}
+
+.sm  { font-size: var(--text-sm); }
+.md  { font-size: var(--text-md); }
+.lg  { font-size: var(--text-lg); }
+.xl  { font-size: var(--text-xl); }
+
+.tone-default { color: var(--color-fg); }
+.tone-muted   { color: var(--color-muted-fg); }
+.tone-accent  { color: var(--color-accent); }
+
+.weight-normal   { font-weight: 400; }
+.weight-medium   { font-weight: 500; }
+.weight-semibold { font-weight: 600; }
+.weight-bold     { font-weight: 700; }
+
+.align-left   { text-align: left; }
+.align-center { text-align: center; }
+.align-right  { text-align: right; }

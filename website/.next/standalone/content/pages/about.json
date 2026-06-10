@@ -1,0 +1,78 @@
+{
+  "contractVersion": 1,
+  "title": "About",
+  "slug": "about",
+  "description": "The thinking behind Atelier.",
+  "blocks": [
+    {
+      "id": "about-heading",
+      "type": "heading",
+      "text": "A quiet kanban board.",
+      "level": 1,
+      "size": "hero"
+    },
+    {
+      "id": "about-manifesto",
+      "type": "text",
+      "body": "Most productivity apps make you feel busy before you've done anything. Notifications, badges, sync indicators, premium tiers. They dress up task management as if complexity were a feature.\n\nAtelier disagrees.\n\nA kanban board is a simple thing: a few columns, some cards, a way to move them around. That's the whole job. Atelier does that job and stops.",
+      "size": "lg"
+    },
+    {
+      "id": "about-principles",
+      "type": "grid",
+      "heading": "Design principles",
+      "columns": 3,
+      "items": [
+        {
+          "title": "Local-first, always",
+          "body": "Your work is yours. It lives on your device, in a plain JSON file you can read and back up yourself. No server knows what you're working on."
+        },
+        {
+          "title": "No configuration required",
+          "body": "Open the app and it works. Three columns, one project, ready to go. If you need more projects or a different accent colour, the options are there — but you don't have to touch them."
+        },
+        {
+          "title": "Calm interface",
+          "body": "No animations that demand attention. No modals stacked on modals. The board is quiet so you can think."
+        }
+      ]
+    },
+    {
+      "id": "about-tech",
+      "type": "two-column",
+      "ratio": "50-50",
+      "left": {
+        "title": "Built with Tauri",
+        "body": "Atelier runs as a native macOS app via Tauri 2 — a thin Rust shell wrapping a React frontend. You get a proper .app bundle, title bar overlay, and system-level feel without Electron's overhead."
+      },
+      "right": {
+        "title": "Fonts bundled in",
+        "body": "Fraunces and Schibsted Grotesk ship inside the app via Fontsource. Atelier needs no network connection to render correctly — open it in a cabin with no Wi-Fi and it looks exactly the same."
+      }
+    },
+    {
+      "id": "about-quote",
+      "type": "quote",
+      "quote": "A tool should fit the hand. Atelier is built to disappear into the work.",
+      "author": "Atelier",
+      "role": "v0.1.0"
+    },
+    {
+      "id": "about-cta",
+      "type": "section",
+      "heading": "Try it for yourself",
+      "body": "Free download. macOS 13 and later.",
+      "background": "muted",
+      "padding": "lg"
+    },
+    {
+      "id": "about-cta-btn",
+      "type": "button",
+      "label": "Download Atelier",
+      "href": "/download",
+      "variant": "primary",
+      "size": "lg",
+      "align": "left"
+    }
+  ]
+}

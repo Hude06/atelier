@@ -1,0 +1,125 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+/* ─── Header ────────────────────────────────────────────────── */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-style: italic;
+  text-decoration: none;
+  color: var(--color-fg);
+  letter-spacing: -0.01em;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.navLink {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--color-muted-fg);
+  transition: color 0.15s;
+}
+
+.navLink:hover {
+  color: var(--color-fg);
+}
+
+.navCta {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--color-primary-fg);
+  background-color: var(--color-primary);
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius);
+  transition: opacity 0.15s;
+}
+
+.navCta:hover {
+  opacity: 0.85;
+}
+
+/* ─── Main ──────────────────────────────────────────────────── */
+.main {
+  flex: 1;
+}
+
+/* ─── Footer ────────────────────────────────────────────────── */
+.footer {
+  border-top: 1px solid var(--color-border);
+  padding-block: var(--space-8);
+}
+
+.footerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.footerLogo {
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: 600;
+  font-style: italic;
+  color: var(--color-fg);
+  text-decoration: none;
+}
+
+.footerNav {
+  display: flex;
+  gap: var(--space-5);
+}
+
+.footerLink {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-muted-fg);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.footerLink:hover {
+  color: var(--color-fg);
+}
+
+.footerCopy {
+  font-size: var(--text-sm);
+  color: var(--color-muted-fg);
+}
+
+@media (max-width: 600px) {
+  .navLink {
+    display: none;
+  }
+
+  .footerInner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,75 @@
+/* [project]/lib/ui/Stack.module.css [app-client] (css) */
+.Stack-module__mrVwZW__stack {
+  flex-direction: column;
+  display: flex;
+}
+
+.Stack-module__mrVwZW__gap-0 {
+  gap: 0;
+}
+
+.Stack-module__mrVwZW__gap-1 {
+  gap: var(--space-1);
+}
+
+.Stack-module__mrVwZW__gap-2 {
+  gap: var(--space-2);
+}
+
+.Stack-module__mrVwZW__gap-3 {
+  gap: var(--space-3);
+}
+
+.Stack-module__mrVwZW__gap-4 {
+  gap: var(--space-4);
+}
+
+.Stack-module__mrVwZW__gap-5 {
+  gap: var(--space-5);
+}
+
+.Stack-module__mrVwZW__gap-6 {
+  gap: var(--space-6);
+}
+
+.Stack-module__mrVwZW__gap-8 {
+  gap: var(--space-8);
+}
+
+.Stack-module__mrVwZW__gap-10 {
+  gap: var(--space-10);
+}
+
+.Stack-module__mrVwZW__gap-12 {
+  gap: var(--space-12);
+}
+
+.Stack-module__mrVwZW__gap-16 {
+  gap: var(--space-16);
+}
+
+.Stack-module__mrVwZW__gap-20 {
+  gap: var(--space-20);
+}
+
+.Stack-module__mrVwZW__gap-24 {
+  gap: var(--space-24);
+}
+
+.Stack-module__mrVwZW__align-start {
+  align-items: flex-start;
+}
+
+.Stack-module__mrVwZW__align-center {
+  align-items: center;
+}
+
+.Stack-module__mrVwZW__align-end {
+  align-items: flex-end;
+}
+
+.Stack-module__mrVwZW__align-stretch {
+  align-items: stretch;
+}
+
+/*# sourceMappingURL=lib_ui_Stack_module_css_bad6b30c._.single.css.map*/

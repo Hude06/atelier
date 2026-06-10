@@ -1,0 +1,20 @@
+{
+  "name": "tech",
+  "label": "Tech",
+  "description": "Terminal-inspired. Deep slate, fluorescent cyan accent.",
+  "colors": {
+    "bg": "oklch(0.12 0.02 260)",
+    "fg": "oklch(0.92 0.02 260)",
+    "primary": "oklch(0.82 0.22 195)",
+    "primaryForeground": "oklch(0.12 0.02 260)",
+    "accent": "oklch(0.82 0.22 195)",
+    "accentForeground": "oklch(0.12 0.02 260)",
+    "muted": "oklch(0.18 0.02 260)",
+    "mutedForeground": "oklch(0.65 0.02 260)",
+    "border": "oklch(0.22 0.02 260)",
+    "card": "oklch(0.15 0.02 260)",
+    "cardForeground": "oklch(0.92 0.02 260)"
+  },
+  "radius": "0.125rem",
+  "fontPair": "tech"
+}

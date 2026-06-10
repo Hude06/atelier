@@ -1,0 +1,64 @@
+.figure {
+  padding-block: var(--space-12);
+  margin: 0;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  align-items: flex-start;
+}
+
+.quote {
+  font-family: var(--font-heading);
+  font-size: var(--text-display);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--color-fg);
+  quotes: none;
+}
+
+.quote::before {
+  content: '\201C';
+  color: var(--color-accent);
+  margin-right: 0.1em;
+}
+
+.quote::after {
+  content: '\201D';
+  color: var(--color-accent);
+  margin-left: 0.1em;
+}
+
+.caption {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-border);
+}
+
+.author {
+  font-weight: 600;
+  font-size: var(--text-md);
+}
+
+.role {
+  font-size: var(--text-sm);
+  color: var(--color-muted-fg);
+  margin-top: 0.125rem;
+}
+
+@media (max-width: 640px) {
+  .quote {
+    font-size: var(--text-xl);
+  }
+}

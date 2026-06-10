@@ -1,0 +1,80 @@
+{
+  "contractVersion": 1,
+  "title": "Download",
+  "slug": "download",
+  "description": "Download Atelier for Mac — free, no sign-up.",
+  "blocks": [
+    {
+      "id": "dl-heading",
+      "type": "heading",
+      "text": "Download Atelier",
+      "level": 1,
+      "size": "hero"
+    },
+    {
+      "id": "dl-intro",
+      "type": "text",
+      "body": "Free. No account. No subscription. Open the .dmg, drag to Applications, done.",
+      "size": "lg",
+      "tone": "muted"
+    },
+    {
+      "id": "dl-button",
+      "type": "button",
+      "label": "Download for Mac (macOS 13+)",
+      "href": "https://github.com/Hude06/atelier/releases/latest",
+      "variant": "primary",
+      "size": "lg",
+      "align": "left"
+    },
+    {
+      "id": "dl-reqs",
+      "type": "section",
+      "heading": "System requirements",
+      "body": "macOS 13 Ventura or later. Apple Silicon and Intel both supported.",
+      "background": "muted",
+      "padding": "lg"
+    },
+    {
+      "id": "dl-steps",
+      "type": "grid",
+      "heading": "Getting started",
+      "columns": 3,
+      "items": [
+        {
+          "title": "1. Download",
+          "body": "Click the button above to download the latest .dmg from GitHub Releases."
+        },
+        {
+          "title": "2. Install",
+          "body": "Open the .dmg file and drag Atelier into your Applications folder. Eject the disk image."
+        },
+        {
+          "title": "3. Open",
+          "body": "Launch Atelier from Applications. It starts with one project already seeded so you can see it in action immediately."
+        }
+      ]
+    },
+    {
+      "id": "dl-data",
+      "type": "two-column",
+      "ratio": "50-50",
+      "left": {
+        "title": "Where is my data?",
+        "body": "Everything lives in:\n~/Library/Application Support/com.jude.atelier/atelier-state.json\n\nIt's plain JSON. You can open it in any text editor, back it up to wherever you want, or copy it between machines."
+      },
+      "right": {
+        "title": "Updates",
+        "body": "Atelier checks for updates silently on launch. If a new version is available you'll see a prompt in Settings (⌘,). You can also check manually anytime from the Updates section."
+      }
+    },
+    {
+      "id": "dl-source",
+      "type": "section",
+      "heading": "Open source",
+      "body": "Atelier is open source. Read the code, file issues, or build it yourself from the repository.",
+      "background": "default",
+      "padding": "lg"
+    }
+  ]
+}

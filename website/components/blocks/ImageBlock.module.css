@@ -1,0 +1,26 @@
+.wrapper {
+  padding-block: var(--space-8);
+}
+
+.inner {
+  margin-inline: auto;
+}
+
+.sm  { max-width: 480px; }
+.md  { max-width: 720px; }
+.lg  { max-width: 960px; }
+.full { max-width: 100%; }
+
+.img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+}
+
+.caption {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-muted-fg);
+  text-align: center;
+}

@@ -1,0 +1,64 @@
+/* [project]/components/blocks/FormBlock.module.css [app-client] (css) */
+.FormBlock-module__Zt-mDq__wrapper {
+  padding-block: var(--space-10);
+}
+
+.FormBlock-module__Zt-mDq__form {
+  gap: var(--space-5);
+  flex-direction: column;
+  max-width: 560px;
+  display: flex;
+}
+
+.FormBlock-module__Zt-mDq__heading {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-2);
+  letter-spacing: -.02em;
+  font-weight: 700;
+}
+
+.FormBlock-module__Zt-mDq__field {
+  gap: var(--space-2);
+  flex-direction: column;
+  display: flex;
+}
+
+.FormBlock-module__Zt-mDq__label {
+  font-size: var(--text-sm);
+  color: var(--color-fg);
+  font-weight: 600;
+}
+
+.FormBlock-module__Zt-mDq__required {
+  color: var(--color-accent);
+  margin-left: .2em;
+}
+
+.FormBlock-module__Zt-mDq__input, .FormBlock-module__Zt-mDq__textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  color: var(--color-fg);
+  background-color: var(--color-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: .625rem .875rem;
+  transition: border-color .15s;
+}
+
+.FormBlock-module__Zt-mDq__input:focus, .FormBlock-module__Zt-mDq__textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-primary) 20%, transparent);
+  outline: none;
+}
+
+.FormBlock-module__Zt-mDq__textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+/*# sourceMappingURL=components_blocks_FormBlock_module_css_bad6b30c._.single.css.map*/
