@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/site/styles.css"],"sourcesContent":["/*\n  Atelier website — client-owned global overrides.\n  Applied after framework globals via app/layout.tsx.\n*/\n\n/* Italic heading style matches Fraunces personality */\n[data-theme=\"warm\"] h1,\n[data-theme=\"warm\"] h2 {\n  font-style: italic;\n}\n\n/* Hero gets a warm bottom rule */\n[data-theme=\"warm\"] .hero {\n  border-bottom: 1px solid var(--color-border);\n}\n\n/* Keyboard shortcut grid cards: smaller padding, monospace title */\n[data-theme=\"warm\"] .card-title {\n  font-family: var(--font-body);\n  font-style: normal;\n  font-size: var(--text-md);\n  letter-spacing: 0.05em;\n}\n"],"names":[],"mappings":"AAMA;;;;AAMA;;;;AAKA"}}]
-}

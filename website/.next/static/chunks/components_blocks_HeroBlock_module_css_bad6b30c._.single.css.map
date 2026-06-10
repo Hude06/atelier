@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/components/blocks/HeroBlock.module.css"],"sourcesContent":[".hero {\n  padding-block: var(--space-20);\n}\n\n.inner {\n  display: flex;\n  flex-direction: column;\n  gap: var(--space-6);\n}\n\n.align-left   { align-items: flex-start; text-align: left; }\n.align-center { align-items: center; text-align: center; }\n.align-right  { align-items: flex-end; text-align: right; }\n\n.subtitle {\n  font-size: var(--text-xl);\n  color: var(--color-muted-fg);\n  max-width: 600px;\n  line-height: 1.5;\n}\n\n.buttons {\n  display: flex;\n  flex-wrap: wrap;\n  gap: var(--space-3);\n  margin-top: var(--space-2);\n}\n\n.image {\n  width: 100%;\n  height: auto;\n  border-radius: var(--radius);\n  margin-top: var(--space-8);\n  display: block;\n}\n\n@media (max-width: 640px) {\n  .hero {\n    padding-block: var(--space-12);\n  }\n  .subtitle {\n    font-size: var(--text-lg);\n  }\n}\n"],"names":[],"mappings":"AAAA;;;;AAIA;;;;;;AAMA;;;;;AACA;;;;;AACA;;;;;AAEA;;;;;;;AAOA;;;;;;;AAOA;;;;;;;;AAQA;EACE;;;;EAGA"}}]
-}

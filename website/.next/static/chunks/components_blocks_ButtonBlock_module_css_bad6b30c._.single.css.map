@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/components/blocks/ButtonBlock.module.css"],"sourcesContent":[".wrapper {\n  display: flex;\n}\n\n.align-left   { justify-content: flex-start; }\n.align-center { justify-content: center; }\n.align-right  { justify-content: flex-end; }\n"],"names":[],"mappings":"AAAA;;;;AAIA;;;;AACA;;;;AACA"}}]
-}

@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/components/blocks/ImageBlock.module.css"],"sourcesContent":[".wrapper {\n  padding-block: var(--space-8);\n}\n\n.inner {\n  margin-inline: auto;\n}\n\n.sm  { max-width: 480px; }\n.md  { max-width: 720px; }\n.lg  { max-width: 960px; }\n.full { max-width: 100%; }\n\n.img {\n  width: 100%;\n  height: auto;\n  display: block;\n  border-radius: var(--radius);\n}\n\n.caption {\n  margin-top: var(--space-2);\n  font-size: var(--text-sm);\n  color: var(--color-muted-fg);\n  text-align: center;\n}\n"],"names":[],"mappings":"AAAA;;;;AAIA;;;;;AAIA;;;;AACA;;;;AACA;;;;AACA;;;;AAEA;;;;;;;AAOA"}}]
-}
