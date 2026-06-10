@@ -5,6 +5,13 @@ import { Icon, PROJECT_GLYPHS } from "../icons";
 import type { IconName } from "../icons";
 import { PALETTE } from "../data";
 
+type EditState = {
+  id: string;
+  icon: IconName;
+  color: string;
+  top: number;
+};
+
 type Props = {
   projects: Project[];
   activeId: string;
@@ -13,6 +20,7 @@ type Props = {
   onAddOpenChange: (open: boolean) => void;
   onSelect: (id: string) => void;
   onAddProject: (name: string, icon: IconName, color: string) => void;
+  onEditProject: (id: string, icon: IconName, color: string) => void;
   onOpenSettings: () => void;
 };
 
@@ -24,11 +32,13 @@ export function Sidebar({
   onAddOpenChange,
   onSelect,
   onAddProject,
+  onEditProject,
   onOpenSettings,
 }: Props) {
   const [name, setName] = useState("");
   const [icon, setIcon] = useState<IconName>("circle");
   const [color, setColor] = useState(PALETTE[0].value);
+  const [editing, setEditing] = useState<EditState | null>(null);
 
   const close = () => {
     onAddOpenChange(false);
@@ -40,6 +50,28 @@ export function Sidebar({
   const create = () => {
     onAddProject(name.trim() || "Untitled", icon, color);
     close();
+  };
+
+  const openEdit = (p: Project, buttonTop: number) => {
+    onAddOpenChange(false);
+    const clampedTop = Math.min(buttonTop, window.innerHeight - 248);
+    setEditing({ id: p.id, icon: p.icon, color: p.color, top: clampedTop });
+  };
+
+  const closeEdit = () => setEditing(null);
+
+  const setEditIcon = (g: IconName) => {
+    if (!editing) return;
+    const next = { ...editing, icon: g };
+    setEditing(next);
+    onEditProject(next.id, g, next.color);
+  };
+
+  const setEditColor = (c: string) => {
+    if (!editing) return;
+    const next = { ...editing, color: c };
+    setEditing(next);
+    onEditProject(next.id, next.icon, c);
   };
 
   return (
@@ -61,6 +93,11 @@ export function Sidebar({
               style={{ "--project-color": p.color } as CSSProperties}
               title={p.name}
               onClick={() => onSelect(p.id)}
+              onContextMenu={(e) => {
+                e.preventDefault();
+                const rect = e.currentTarget.getBoundingClientRect();
+                openEdit(p, rect.top);
+              }}
             >
               <Icon name={p.icon} size={19} />
             </button>
@@ -138,6 +175,50 @@ export function Sidebar({
             <button type="button" className="btn-primary full" onClick={create}>
               Create project
             </button>
+          </div>
+        </>
+      )}
+
+      {editing && (
+        <>
+          <div className="popover-backdrop" onClick={closeEdit} />
+          <div
+            className="edit-icon-popover"
+            style={{ "--project-color": editing.color, top: editing.top } as CSSProperties}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                e.stopPropagation();
+                closeEdit();
+              }
+            }}
+          >
+            <p className="popover-label">Edit icon</p>
+            <p className="popover-sub">Glyph</p>
+            <div className="glyph-grid">
+              {PROJECT_GLYPHS.map((g) => (
+                <button
+                  key={g}
+                  type="button"
+                  className={`glyph-btn${g === editing.icon ? " selected" : ""}`}
+                  onClick={() => setEditIcon(g)}
+                >
+                  <Icon name={g} size={17} />
+                </button>
+              ))}
+            </div>
+            <p className="popover-sub">Color</p>
+            <div className="swatch-row">
+              {PALETTE.map((c) => (
+                <button
+                  key={c.id}
+                  type="button"
+                  className={`swatch${c.value === editing.color ? " selected" : ""}`}
+                  style={{ background: c.value }}
+                  title={c.id}
+                  onClick={() => setEditColor(c.value)}
+                />
+              ))}
+            </div>
           </div>
         </>
       )}

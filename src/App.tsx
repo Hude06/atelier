@@ -138,6 +138,9 @@ function AppLoaded({ initial }: { initial: AppState }) {
     setView("board");
   };
 
+  const editProjectAppearance = (id: string, icon: IconName, color: string) =>
+    patchProject(id, (p) => ({ ...p, icon, color }));
+
   const renameProject = (id: string, name: string) =>
     patchProject(id, (p) => ({ ...p, name }));
 
@@ -297,6 +300,7 @@ function AppLoaded({ initial }: { initial: AppState }) {
         onAddOpenChange={setAddingProject}
         onSelect={selectProject}
         onAddProject={addProject}
+        onEditProject={editProjectAppearance}
         onOpenSettings={() => setView("settings")}
       />
       <main className="main">
