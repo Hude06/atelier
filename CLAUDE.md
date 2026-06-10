@@ -25,16 +25,18 @@ The signing key lives at `~/.tauri/atelier.key` (no password — use `--password
    ```
    source .env && npm run tauri build
    ```
-   Output: `src-tauri/target/release/bundle/dmg/Atelier_X.X.X_aarch64.dmg`
+   Outputs:
+   - DMG (for direct download): `src-tauri/target/release/bundle/dmg/Atelier_X.X.X_aarch64.dmg`
+   - App archive (for updater): `src-tauri/target/release/bundle/macos/Atelier_X.X.X_aarch64.app.tar.gz`
 
-3. **Sign** the dmg for the updater:
+3. **Sign** the `.app.tar.gz` for the updater (NOT the dmg — the updater extracts a tar.gz, not a dmg):
    ```
    npx tauri signer sign \
      --private-key-path /Users/jude/.tauri/atelier.key \
      --password "" \
-     src-tauri/target/release/bundle/dmg/Atelier_X.X.X_aarch64.dmg
+     src-tauri/target/release/bundle/macos/Atelier_X.X.X_aarch64.app.tar.gz
    ```
-   Output: `Atelier_X.X.X_aarch64.dmg.sig` alongside the dmg.
+   Output: `Atelier_X.X.X_aarch64.app.tar.gz.sig` alongside the archive.
 
 4. **Create `latest.json`** in the project root:
    ```json
@@ -45,12 +47,12 @@ The signing key lives at `~/.tauri/atelier.key` (no password — use `--password
      "platforms": {
        "darwin-aarch64": {
          "signature": "<contents of .sig file>",
-         "url": "https://github.com/Hude06/atelier/releases/download/vX.X.X/Atelier_X.X.X_aarch64.dmg"
+         "url": "https://github.com/Hude06/atelier/releases/download/vX.X.X/Atelier_X.X.X_aarch64.app.tar.gz"
        }
      }
    }
    ```
-   Read the signature with: `cat src-tauri/target/release/bundle/dmg/Atelier_X.X.X_aarch64.dmg.sig`
+   Read the signature with: `cat src-tauri/target/release/bundle/macos/Atelier_X.X.X_aarch64.app.tar.gz.sig`
 
 5. **Commit and push** the version bump:
    ```
@@ -59,12 +61,13 @@ The signing key lives at `~/.tauri/atelier.key` (no password — use `--password
    git push origin main
    ```
 
-6. **Create the GitHub release**:
+6. **Create the GitHub release** (upload both the dmg for manual installs and the tar.gz for the updater):
    ```
    gh release create vX.X.X \
      --title "Atelier X.X.X" \
      --notes "<release notes>" \
      src-tauri/target/release/bundle/dmg/Atelier_X.X.X_aarch64.dmg \
+     src-tauri/target/release/bundle/macos/Atelier_X.X.X_aarch64.app.tar.gz \
      latest.json \
      -R Hude06/atelier
    ```

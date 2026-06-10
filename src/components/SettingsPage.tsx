@@ -149,7 +149,7 @@ export function SettingsPage({
           <div className="settings-row">
             <div>
               <p className="row-label">
-                {updateStatus === "available" && updateInfo
+                {(updateStatus === "available" || updateStatus === "install-error") && updateInfo
                   ? `Version ${updateInfo.version} available`
                   : "Check for updates"}
               </p>
@@ -159,11 +159,12 @@ export function SettingsPage({
                 {updateStatus === "downloading" && "Downloading update…"}
                 {updateStatus === "ready" && "Update installed. Restart to apply."}
                 {updateStatus === "error" && "Could not check for updates."}
+                {updateStatus === "install-error" && "Could not install update."}
                 {(updateStatus === "idle" || updateStatus === "checking") &&
                   `Currently on version ${appVersion}.`}
               </p>
             </div>
-            {updateStatus === "available" ? (
+            {(updateStatus === "available" || updateStatus === "install-error") ? (
               <button
                 type="button"
                 className="btn-primary"

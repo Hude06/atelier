@@ -285,8 +285,9 @@ function AppLoaded({ initial }: { initial: AppState }) {
     try {
       await downloadAndInstall();
       setUpdateStatus("ready");
-    } catch {
-      setUpdateStatus("error");
+    } catch (e) {
+      console.error("Update install failed:", e);
+      setUpdateStatus("install-error");
     }
   };
 

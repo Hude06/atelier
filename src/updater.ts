@@ -5,7 +5,8 @@ export type UpdateStatus =
   | "available"
   | "downloading"
   | "ready"
-  | "error";
+  | "error"
+  | "install-error";
 
 export interface UpdateInfo {
   version: string;
