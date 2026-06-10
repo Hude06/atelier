@@ -1,11 +1,11 @@
 {
-  "version": "0.1.4",
-  "notes": "Auto-updater test release",
+  "version": "0.1.5",
+  "notes": "Auto-updater fixes: update archives are now generated and signed by the Tauri bundler, and install errors show the underlying cause in Settings.",
   "pub_date": "2026-06-10T00:00:00Z",
   "platforms": {
     "darwin-aarch64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUNnZrN2M2U1QrenMxV3ZBMmJwTFVHdUZwSG9BenF0cWR5R2R2QWpLS0JEV0tPTlJQOGprOCszcVdYdGp4ODFZVmFxSnF1NEltNG9xZVBrZVR2dWp2RFBMOUtieEFuYlFVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzgxMTM0OTQyCWZpbGU6QXRlbGllci5hcHAudGFyLmd6Cnlid1hiQWRXZU5Lakx6VmxCMU5ldUE1NnVCUkwyTVhrNkhOd1M2V00zOVB5NWRiMGlyMnhqNllhVFNEanczTzVkNEZ6ck9hb2d5ZjVWZjdzcDlQVUF3PT0K",
-      "url": "https://github.com/Hude06/atelier/releases/download/v0.1.4/Atelier_0.1.4_aarch64.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUNnZrN2M2U1Qrem5tYlJKUklicDRCWXpwRFJySHpGU1I4bWRXb1RXVkZEck8xZzBvTmFOeFVuQnBDRklVajM3ck9MKzFROFZwQTBlSTlsekFoY3BkcHdLcVVselhmdGc0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzgxMTM1NTc3CWZpbGU6QXRlbGllci5hcHAudGFyLmd6CmJ1Yk1ZUDFHNVRXNExzOHJXdGFhb3BtYkFCOWpzTjZKWnBENGV3b25QNjc0Z2JuNlVRWFNmMHM0a2tGdzBzY0VIdlNMaWZFMjFjUzNVYjRjSWpUNEJnPT0K",
+      "url": "https://github.com/Hude06/atelier/releases/download/v0.1.5/Atelier_0.1.5_aarch64.app.tar.gz"
     }
   }
 }
