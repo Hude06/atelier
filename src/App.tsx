@@ -115,6 +115,35 @@ function AppLoaded({
     document.documentElement.dataset.density = state.settings.density;
   }, [state.settings.density]);
 
+  // Single-slot snapshot undo for destructive actions, bounded by the
+  // lifetime of its toast.
+  const undoRef = useRef<AppState | null>(null);
+
+  const performUndo = () => {
+    const snapshot = undoRef.current;
+    if (!snapshot) return;
+    undoRef.current = null;
+    setState(snapshot);
+    dismiss("undo");
+  };
+
+  const destructive = (label: string, fn: (s: AppState) => AppState) => {
+    setState((s) => {
+      undoRef.current = s;
+      return fn(s);
+    });
+    push({
+      id: "undo",
+      message: label,
+      actionLabel: "Undo",
+      duration: 6000,
+      onAction: performUndo,
+      onClose: () => {
+        undoRef.current = null;
+      },
+    });
+  };
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey) {
@@ -133,6 +162,18 @@ function AppLoaded({
           e.preventDefault();
           setState((s) => mutate.cycleProject(s, 1));
           setView("board");
+        } else if (e.key === "z" && !e.shiftKey) {
+          // Text fields keep their native undo.
+          const el = document.activeElement;
+          const inEditor =
+            el instanceof HTMLElement &&
+            (el.tagName === "INPUT" ||
+              el.tagName === "TEXTAREA" ||
+              el.isContentEditable);
+          if (!inEditor) {
+            e.preventDefault();
+            performUndo();
+          }
         }
       } else if (e.key === "Escape") {
         setView((v) => (v === "settings" ? "board" : v));
@@ -178,8 +219,12 @@ function AppLoaded({
   const renameProject = (id: string, name: string) =>
     setState((s) => mutate.renameProject(s, id, name));
 
-  const deleteProject = (id: string) =>
-    setState((s) => mutate.deleteProject(s, id));
+  const deleteProject = (id: string) => {
+    const name = state.projects.find((p) => p.id === id)?.name;
+    destructive(name ? `Deleted “${name}”` : "Project deleted", (s) =>
+      mutate.deleteProject(s, id)
+    );
+  };
 
   const renameColumn = (projectId: string, columnId: string, title: string) =>
     setState((s) => mutate.renameColumn(s, projectId, columnId, title));
@@ -195,7 +240,9 @@ function AppLoaded({
   ) => setState((s) => mutate.updateCard(s, projectId, columnId, cardId, title));
 
   const deleteCard = (projectId: string, columnId: string, cardId: string) =>
-    setState((s) => mutate.deleteCard(s, projectId, columnId, cardId));
+    destructive("Card deleted", (s) =>
+      mutate.deleteCard(s, projectId, columnId, cardId)
+    );
 
   const moveCard = (
     projectId: string,
@@ -208,14 +255,22 @@ function AppLoaded({
       mutate.moveCard(s, projectId, fromColumnId, toColumnId, cardId, toIndex)
     );
 
-  const clearColumn = (projectId: string, columnId: string) =>
-    setState((s) => mutate.clearColumn(s, projectId, columnId));
+  const clearColumn = (projectId: string, columnId: string) => {
+    const column = state.projects
+      .find((p) => p.id === projectId)
+      ?.columns.find((c) => c.id === columnId);
+    const n = column?.cards.length ?? 0;
+    if (n === 0) return;
+    destructive(`Cleared ${n} card${n === 1 ? "" : "s"}`, (s) =>
+      mutate.clearColumn(s, projectId, columnId)
+    );
+  };
 
   const updateSettings = (patch: Partial<Settings>) =>
     setState((s) => mutate.updateSettings(s, patch));
 
   const resetAll = () => {
-    setState(seedState());
+    destructive("Everything was reset", () => seedState());
     setView("board");
   };
 

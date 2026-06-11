@@ -2,6 +2,7 @@ import { Fragment, useRef, useState } from "react";
 import type { CSSProperties, DragEvent } from "react";
 import type { Column as ColumnType } from "../types";
 import { CardItem } from "./CardItem";
+import type { MoveDirection } from "./CardItem";
 import { EditableText } from "./EditableText";
 import { Icon } from "../icons";
 
@@ -17,6 +18,7 @@ type Props = {
   onAddCard: (title: string) => void;
   onUpdateCard: (cardId: string, title: string) => void;
   onDeleteCard: (cardId: string) => void;
+  onKeyboardMove: (cardId: string, direction: MoveDirection) => void;
   onCardDragStart: (cardId: string, fromColumnId: string) => void;
   onCardDragEnd: () => void;
   onDragOver: (e: DragEvent<HTMLElement>, columnId: string) => void;
@@ -36,6 +38,7 @@ export function Column({
   onAddCard,
   onUpdateCard,
   onDeleteCard,
+  onKeyboardMove,
   onCardDragStart,
   onCardDragEnd,
   onDragOver,
@@ -77,6 +80,7 @@ export function Column({
               onDragEnd={onCardDragEnd}
               onUpdate={(title) => onUpdateCard(card.id, title)}
               onDelete={() => onDeleteCard(card.id)}
+              onKeyboardMove={(direction) => onKeyboardMove(card.id, direction)}
             />
           </Fragment>
         ))}

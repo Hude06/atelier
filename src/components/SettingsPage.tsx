@@ -136,6 +136,10 @@ export function SettingsPage({
               { keys: ["⌘", "]"], label: "Next project" },
               { keys: ["⌘", ","], label: "Open settings" },
               { keys: ["⌘", "↵"], label: "Save card" },
+              { keys: ["⌘", "Z"], label: "Undo" },
+              { keys: ["↵"], label: "Edit focused card" },
+              { keys: ["⌫"], label: "Delete focused card" },
+              { keys: ["⌘", "← → ↑ ↓"], label: "Move focused card" },
               { keys: ["Esc"], label: "Cancel / close" },
             ].map(({ keys, label }) => (
               <div key={label} className="shortcut-row">

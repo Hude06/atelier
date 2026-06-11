@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import type { Card } from "../types";
 import { Icon } from "../icons";
 
+export type MoveDirection = "left" | "right" | "up" | "down";
+
 type Props = {
   card: Card;
   columnId: string;
@@ -11,6 +13,7 @@ type Props = {
   onDragEnd: () => void;
   onUpdate: (title: string) => void;
   onDelete: () => void;
+  onKeyboardMove: (direction: MoveDirection) => void;
 };
 
 export function CardItem({
@@ -22,6 +25,7 @@ export function CardItem({
   onDragEnd,
   onUpdate,
   onDelete,
+  onKeyboardMove,
 }: Props) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(card.title);
@@ -75,6 +79,10 @@ export function CardItem({
     <div
       className={`card${done ? " done" : ""}${dragging ? " dragging" : ""}`}
       data-card
+      data-card-id={card.id}
+      tabIndex={0}
+      role="article"
+      aria-label={card.title}
       draggable
       onDragStart={(e) => {
         e.dataTransfer.effectAllowed = "move";
@@ -82,6 +90,27 @@ export function CardItem({
         onDragStart(card.id, columnId);
       }}
       onDragEnd={onDragEnd}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          setDraft(card.title);
+          setEditing(true);
+        } else if (e.key === "Backspace" || e.key === "Delete") {
+          e.preventDefault();
+          onDelete();
+        } else if ((e.metaKey || e.ctrlKey) && e.key.startsWith("Arrow")) {
+          e.preventDefault();
+          onKeyboardMove(
+            e.key === "ArrowLeft"
+              ? "left"
+              : e.key === "ArrowRight"
+                ? "right"
+                : e.key === "ArrowUp"
+                  ? "up"
+                  : "down"
+          );
+        }
+      }}
     >
       {done && <Icon name="check" size={13} className="card-check" />}
       <p

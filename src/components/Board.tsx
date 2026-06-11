@@ -1,7 +1,8 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { CSSProperties, DragEvent } from "react";
 import type { Project } from "../types";
 import { Column } from "./Column";
+import type { MoveDirection } from "./CardItem";
 import { EditableText } from "./EditableText";
 import { Icon } from "../icons";
 
@@ -122,6 +123,58 @@ export function Board({
     setConfirmDelete(false);
   };
 
+  // After a keyboard move re-renders the board, put focus back on the card
+  // (it remounts inside its new column).
+  const pendingFocus = useRef<string | null>(null);
+  useEffect(() => {
+    if (!pendingFocus.current) return;
+    const el = document.querySelector<HTMLElement>(
+      `[data-card-id="${pendingFocus.current}"]`
+    );
+    el?.focus();
+    pendingFocus.current = null;
+  });
+
+  const moveByKey = (
+    cardId: string,
+    columnId: string,
+    direction: MoveDirection
+  ) => {
+    const colIndex = project.columns.findIndex((c) => c.id === columnId);
+    const column = project.columns[colIndex];
+    if (!column) return;
+    const cardIndex = column.cards.findIndex((c) => c.id === cardId);
+    if (cardIndex === -1) return;
+
+    if (direction === "left" || direction === "right") {
+      const target =
+        project.columns[colIndex + (direction === "left" ? -1 : 1)];
+      if (!target) return;
+      pendingFocus.current = cardId;
+      onMoveCard(
+        columnId,
+        target.id,
+        cardId,
+        Math.min(cardIndex, target.cards.length)
+      );
+      return;
+    }
+
+    if (
+      direction === "up" ? cardIndex === 0 : cardIndex === column.cards.length - 1
+    ) {
+      return;
+    }
+    pendingFocus.current = cardId;
+    // Same-column toIndex is a pre-removal slot: up one = i-1, down one = i+2.
+    onMoveCard(
+      columnId,
+      columnId,
+      cardId,
+      direction === "up" ? cardIndex - 1 : cardIndex + 2
+    );
+  };
+
   return (
     <div className="board-view">
       <header className="board-head">
@@ -209,6 +262,9 @@ export function Board({
               onUpdateCard(column.id, cardId, title)
             }
             onDeleteCard={(cardId) => onDeleteCard(column.id, cardId)}
+            onKeyboardMove={(cardId, direction) =>
+              moveByKey(cardId, column.id, direction)
+            }
             onCardDragStart={startDrag}
             onCardDragEnd={endDrag}
             onDragOver={dragOverColumn}
