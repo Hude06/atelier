@@ -39,7 +39,7 @@ export function SettingsPage({
     import("@tauri-apps/api/app")
       .then((m) => m.getVersion())
       .then(setAppVersion)
-      .catch(() => setAppVersion("0.1.1"));
+      .catch(() => setAppVersion("dev"));
   }, []);
 
   return (

@@ -13,6 +13,10 @@ export const PALETTE = [
 ];
 
 export function uid(): string {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+  // WKWebView < Safari 15.4 — collision-resistant enough for local ids.
   return (
     Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4)
   );

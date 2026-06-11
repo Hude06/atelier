@@ -1,7 +1,11 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { createProject, seedState, uid, DEFAULT_COLUMNS } from "./data";
 
 describe("uid", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
   it("returns non-empty strings", () => {
     expect(uid()).toBeTruthy();
     expect(typeof uid()).toBe("string");
@@ -11,6 +15,13 @@ describe("uid", () => {
     const seen = new Set<string>();
     for (let i = 0; i < 10_000; i++) seen.add(uid());
     expect(seen.size).toBe(10_000);
+  });
+
+  it("falls back when crypto.randomUUID is unavailable", () => {
+    vi.stubGlobal("crypto", {});
+    const id = uid();
+    expect(id).toBeTruthy();
+    expect(id).not.toContain("-"); // fallback format, not a UUID
   });
 });
 

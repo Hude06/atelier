@@ -1,0 +1,12 @@
+/* Pre-paint background so the window matches the theme before the app JS
+   loads. Lives in an external file (not an inline <style>) because Tauri
+   would hash inline styles into the CSP, which disables 'unsafe-inline'
+   and breaks every React style={} attribute. */
+html {
+  background: #f6f3ec;
+}
+@media (prefers-color-scheme: dark) {
+  html {
+    background: #191713;
+  }
+}
