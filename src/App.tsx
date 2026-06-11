@@ -13,7 +13,8 @@ import {
   importData,
 } from "./storage";
 import type { InitResult } from "./storage";
-import { createProject, seedState, uid, PALETTE } from "./data";
+import { seedState } from "./data";
+import * as mutate from "./state";
 import type { AppState, Project, Settings } from "./types";
 import type { IconName } from "./icons";
 import { checkForUpdate, downloadAndInstall } from "./updater";
@@ -126,19 +127,11 @@ function AppLoaded({
           setAddingProject(true);
         } else if (e.key === "[") {
           e.preventDefault();
-          setState((s) => {
-            const idx = s.projects.findIndex((p) => p.id === s.activeProjectId);
-            const prev = s.projects[(idx - 1 + s.projects.length) % s.projects.length];
-            return prev ? { ...s, activeProjectId: prev.id } : s;
-          });
+          setState((s) => mutate.cycleProject(s, -1));
           setView("board");
         } else if (e.key === "]") {
           e.preventDefault();
-          setState((s) => {
-            const idx = s.projects.findIndex((p) => p.id === s.activeProjectId);
-            const next = s.projects[(idx + 1) % s.projects.length];
-            return next ? { ...s, activeProjectId: next.id } : s;
-          });
+          setState((s) => mutate.cycleProject(s, 1));
           setView("board");
         }
       } else if (e.key === "Escape") {
@@ -169,95 +162,40 @@ function AppLoaded({
     [state.projects, state.activeProjectId]
   );
 
-  const patchProject = (id: string, fn: (p: Project) => Project) =>
-    setState((s) => ({
-      ...s,
-      projects: s.projects.map((p) => (p.id === id ? fn(p) : p)),
-    }));
-
   const selectProject = (id: string) => {
-    setState((s) => ({ ...s, activeProjectId: id }));
+    setState((s) => mutate.selectProject(s, id));
     setView("board");
   };
 
   const addProject = (name: string, icon: IconName, color: string) => {
-    const project = createProject(name, icon, color);
-    setState((s) => ({
-      ...s,
-      projects: [...s.projects, project],
-      activeProjectId: project.id,
-    }));
+    setState((s) => mutate.addProject(s, name, icon, color));
     setView("board");
   };
 
   const editProjectAppearance = (id: string, icon: IconName, color: string) =>
-    patchProject(id, (p) => ({ ...p, icon, color }));
+    setState((s) => mutate.setProjectAppearance(s, id, icon, color));
 
   const renameProject = (id: string, name: string) =>
-    patchProject(id, (p) => ({ ...p, name }));
+    setState((s) => mutate.renameProject(s, id, name));
 
   const deleteProject = (id: string) =>
-    setState((s) => {
-      const projects = s.projects.filter((p) => p.id !== id);
-      if (projects.length === 0) {
-        projects.push(createProject("Untitled", "circle", PALETTE[0].value));
-      }
-      return {
-        ...s,
-        projects,
-        activeProjectId:
-          s.activeProjectId === id ? projects[0].id : s.activeProjectId,
-      };
-    });
+    setState((s) => mutate.deleteProject(s, id));
 
   const renameColumn = (projectId: string, columnId: string, title: string) =>
-    patchProject(projectId, (p) => ({
-      ...p,
-      columns: p.columns.map((c) => (c.id === columnId ? { ...c, title } : c)),
-    }));
+    setState((s) => mutate.renameColumn(s, projectId, columnId, title));
 
   const addCard = (projectId: string, columnId: string, title: string) =>
-    patchProject(projectId, (p) => ({
-      ...p,
-      columns: p.columns.map((c) =>
-        c.id === columnId
-          ? {
-              ...c,
-              cards: [...c.cards, { id: uid(), title, createdAt: Date.now() }],
-            }
-          : c
-      ),
-    }));
+    setState((s) => mutate.addCard(s, projectId, columnId, title));
 
   const updateCard = (
     projectId: string,
     columnId: string,
     cardId: string,
     title: string
-  ) =>
-    patchProject(projectId, (p) => ({
-      ...p,
-      columns: p.columns.map((c) =>
-        c.id === columnId
-          ? {
-              ...c,
-              cards: c.cards.map((card) =>
-                card.id === cardId ? { ...card, title } : card
-              ),
-            }
-          : c
-      ),
-    }));
+  ) => setState((s) => mutate.updateCard(s, projectId, columnId, cardId, title));
 
   const deleteCard = (projectId: string, columnId: string, cardId: string) =>
-    patchProject(projectId, (p) => ({
-      ...p,
-      columns: p.columns.map((c) =>
-        c.id === columnId
-          ? { ...c, cards: c.cards.filter((card) => card.id !== cardId) }
-          : c
-      ),
-    }));
+    setState((s) => mutate.deleteCard(s, projectId, columnId, cardId));
 
   const moveCard = (
     projectId: string,
@@ -266,55 +204,15 @@ function AppLoaded({
     cardId: string,
     toIndex: number
   ) =>
-    patchProject(projectId, (p) => {
-      const from = p.columns.find((c) => c.id === fromColumnId);
-      if (!from) return p;
-      const fromIndex = from.cards.findIndex((c) => c.id === cardId);
-      if (fromIndex === -1) return p;
-      const card = from.cards[fromIndex];
+    setState((s) =>
+      mutate.moveCard(s, projectId, fromColumnId, toColumnId, cardId, toIndex)
+    );
 
-      if (fromColumnId === toColumnId) {
-        const cards = [...from.cards];
-        cards.splice(fromIndex, 1);
-        const insertAt = toIndex > fromIndex ? toIndex - 1 : toIndex;
-        cards.splice(insertAt, 0, card);
-        return {
-          ...p,
-          columns: p.columns.map((c) =>
-            c.id === fromColumnId ? { ...c, cards } : c
-          ),
-        };
-      }
-
-      return {
-        ...p,
-        columns: p.columns.map((c) => {
-          if (c.id === fromColumnId) {
-            return { ...c, cards: c.cards.filter((x) => x.id !== cardId) };
-          }
-          if (c.id === toColumnId) {
-            const cards = [...c.cards];
-            cards.splice(Math.min(toIndex, cards.length), 0, card);
-            return { ...c, cards };
-          }
-          return c;
-        }),
-      };
-    });
-
-  const clearDone = (projectId: string) =>
-    patchProject(projectId, (p) => {
-      const last = p.columns[p.columns.length - 1];
-      return {
-        ...p,
-        columns: p.columns.map((c) =>
-          c.id === last.id ? { ...c, cards: [] } : c
-        ),
-      };
-    });
+  const clearColumn = (projectId: string, columnId: string) =>
+    setState((s) => mutate.clearColumn(s, projectId, columnId));
 
   const updateSettings = (patch: Partial<Settings>) =>
-    setState((s) => ({ ...s, settings: { ...s.settings, ...patch } }));
+    setState((s) => mutate.updateSettings(s, patch));
 
   const resetAll = () => {
     setState(seedState());
@@ -396,7 +294,7 @@ function AppLoaded({
             showCounts={state.settings.showCounts}
             onRenameProject={(name) => renameProject(active.id, name)}
             onDeleteProject={() => deleteProject(active.id)}
-            onClearDone={() => clearDone(active.id)}
+            onClearColumn={(columnId) => clearColumn(active.id, columnId)}
             onRenameColumn={(columnId, title) =>
               renameColumn(active.id, columnId, title)
             }

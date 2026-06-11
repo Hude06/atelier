@@ -13,7 +13,7 @@ type Props = {
   showCounts: boolean;
   onRenameProject: (name: string) => void;
   onDeleteProject: () => void;
-  onClearDone: () => void;
+  onClearColumn: (columnId: string) => void;
   onRenameColumn: (columnId: string, title: string) => void;
   onAddCard: (columnId: string, title: string) => void;
   onUpdateCard: (columnId: string, cardId: string, title: string) => void;
@@ -31,7 +31,7 @@ export function Board({
   showCounts,
   onRenameProject,
   onDeleteProject,
-  onClearDone,
+  onClearColumn,
   onRenameColumn,
   onAddCard,
   onUpdateCard,
@@ -158,7 +158,9 @@ export function Board({
                   type="button"
                   className="menu-item"
                   onClick={() => {
-                    onClearDone();
+                    onClearColumn(
+                      project.columns[project.columns.length - 1].id
+                    );
                     closeMenu();
                   }}
                 >

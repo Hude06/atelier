@@ -8,6 +8,10 @@ Tauri v2 desktop app (macOS, Apple Silicon). React + TypeScript frontend (`src/`
 - `npm run tauri dev` — full desktop app with hot reload
 - `npm run build` — Vite production build (output: `dist/`)
 - `npx tsc --noEmit` — type-check without building
+- `npm test` — run the vitest unit suite (`npm run test:watch` for watch mode)
+
+CI (`.github/workflows/ci.yml`) runs tests + the frontend build on ubuntu and
+`cargo check`/`clippy` on macos for every push to main and every PR.
 
 ## Release process (macOS aarch64)
 
@@ -15,7 +19,17 @@ Tauri v2 desktop app (macOS, Apple Silicon). React + TypeScript frontend (`src/`
 
 The signing key lives at `~/.tauri/atelier.key` (no password — use `--password ""`).
 
-### Steps to cut a new release
+### Cutting a release
+
+Run the release script — it performs every step below (version bumps in
+`tauri.conf.json` + `Cargo.toml` + `package.json`, signed build, artifact
+renaming, `latest.json`, commit + push, GitHub release):
+
+```
+NOTES="<release notes>" scripts/release.sh X.X.X
+```
+
+### Manual steps (what the script does, for reference/debugging)
 
 1. **Bump version** in both files (keep them in sync):
    - `src-tauri/tauri.conf.json` → `"version": "X.X.X"`
