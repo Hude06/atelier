@@ -12,6 +12,7 @@ import {
   exportData,
   importData,
 } from "./storage";
+import type { InitResult } from "./storage";
 import { createProject, seedState, uid, PALETTE } from "./data";
 import type { AppState, Project, Settings } from "./types";
 import type { IconName } from "./icons";
@@ -21,7 +22,7 @@ import type { UpdateStatus, UpdateInfo } from "./updater";
 type View = "board" | "settings";
 
 export default function App() {
-  const [initial, setInitial] = useState<AppState | null>(null);
+  const [initial, setInitial] = useState<InitResult | null>(null);
 
   useEffect(() => {
     initState().then(setInitial);
@@ -29,10 +30,16 @@ export default function App() {
 
   // Blank (paper-colored) frame while the store loads — it's a few ms.
   if (!initial) return null;
-  return <AppLoaded initial={initial} />;
+  return <AppLoaded initial={initial.state} notices={initial.notices} />;
 }
 
-function AppLoaded({ initial }: { initial: AppState }) {
+function AppLoaded({
+  initial,
+  notices,
+}: {
+  initial: AppState;
+  notices: string[];
+}) {
   const [state, setState] = useState<AppState>(initial);
   const [view, setView] = useState<View>("board");
   const [addingProject, setAddingProject] = useState(false);
@@ -53,6 +60,14 @@ function AppLoaded({ initial }: { initial: AppState }) {
   }, [state]);
 
   useEffect(() => installAutoFlush(), []);
+
+  // Recovery notices from the load pipeline (quarantined file, dropped data).
+  useEffect(() => {
+    for (const notice of notices) {
+      push({ kind: "danger", duration: 0, message: notice });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(
     () =>
