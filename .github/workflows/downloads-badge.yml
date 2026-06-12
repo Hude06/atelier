@@ -23,8 +23,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          total=$(gh api "repos/${GITHUB_REPOSITORY}/releases" --paginate --slurp \
-            --jq '[.[][].assets[] | select(.name | endswith(".dmg")) | .download_count] | add // 0')
+          total=$(gh api "repos/${GITHUB_REPOSITORY}/releases" --paginate \
+            | jq -s '[.[][].assets[] | select(.name | endswith(".dmg")) | .download_count] | add // 0')
           echo "DMG downloads: $total"
           mkdir badge && cd badge
           git init -b badges
