@@ -1,6 +1,6 @@
 # Atelier
 
-[![Downloads](https://img.shields.io/github/downloads/Hude06/atelier/total)](https://github.com/Hude06/atelier/releases)
+[![Downloads](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FHude06%2Fatelier%2Fbadges%2Fdownloads.json)](https://github.com/Hude06/atelier/releases)
 
 A quiet kanban board, built with Tauri 2 + React + TypeScript.
 

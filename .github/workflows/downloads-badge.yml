@@ -1,0 +1,35 @@
+name: downloads-badge
+
+# Publishes a shields.io endpoint JSON to the `badges` branch with the total
+# number of DMG downloads across all releases. DMG-only deliberately excludes
+# `latest.json` update checks and `.app.tar.gz` updater traffic, so the badge
+# reflects people actually downloading the app.
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  badge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish download count to badges branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          total=$(gh api "repos/${GITHUB_REPOSITORY}/releases" --paginate --slurp \
+            --jq '[.[][].assets[] | select(.name | endswith(".dmg")) | .download_count] | add // 0')
+          echo "DMG downloads: $total"
+          mkdir badge && cd badge
+          git init -b badges
+          printf '{"schemaVersion":1,"label":"downloads","message":"%s","color":"c24b2c"}\n' "$total" > downloads.json
+          git add downloads.json
+          git -c user.name=github-actions -c user.email=github-actions@users.noreply.github.com \
+            commit -m "downloads: $total"
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" badges
